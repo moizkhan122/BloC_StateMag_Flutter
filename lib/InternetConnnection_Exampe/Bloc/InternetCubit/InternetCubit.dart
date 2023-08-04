@@ -1,36 +1,33 @@
 
+
+//enum is define if our class is empty there is no data in it so we create enum for file saving
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter_application_1/Bloc/InternetBloc/internet_event.dart';
-import 'package:flutter_application_1/Bloc/InternetBloc/internet_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+enum InternetState { Initail, Gain, Lost}
 
-    //this is complete internet Bloc
-
-class InternetBloc extends Bloc<InternetEvent, InternetState>{
-
-    //note when page is close bloc is also closed automatically
+class InternetCubit extends Cubit<InternetState> {
+      //note when page is close bloc is also closed automatically
     //but connetivity will not close so for closing a connectivity we can create call override close function for 
     //and cancel the connectiity for better performinace
     //for cancellation we use StreamSubscription which is built In in connectivity
 
+      // ignore: prefer_final_fields
       Connectivity _connectivity = Connectivity();
       StreamSubscription? connectivityStreamSubscription;
 
                   //supper keyword is for initializing the extended class
-  InternetBloc() : super(InternetInitialState()){
-    on<InternetGainEvent>((event, emit) => emit(InternetGainState()));
-    on<InternetGainEvent>((event, emit) => emit(InternetGainState()));
+  InternetCubit() : super(InternetState.Initail){
 
     //listner
     connectivityStreamSubscription = _connectivity.onConnectivityChanged.listen((result) { 
 
         if (result == ConnectivityResult.mobile || result == ConnectivityResult.wifi) {
-          add(InternetGainEvent());
+          emit(InternetState.Gain);
         }else{
-          add(InternetLostEvent());
+          emit(InternetState.Lost);
         }
     });
   }

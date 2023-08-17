@@ -1,11 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Phone_Auth_Example_Firebase/Cubic_Phone_Auth/Cubic_Phone_Auth.dart';
-import 'package:flutter_application_1/Phone_Auth_Example_Firebase/HomeScreem.dart';
+// import 'package:flutter_application_1/Phone_Auth_Example_Firebase/Cubic_Phone_Auth/Cubic_Phone_Auth.dart';
+// import 'package:flutter_application_1/Phone_Auth_Example_Firebase/HomeScreem.dart';
+import 'package:flutter_application_1/RoutesExamples/CubitExample/Screen1Cubit.dart';
+import 'package:flutter_application_1/RoutesExamples/Routes/Routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 //import 'package:flutter_application_1/Auth_Example/Auth_Screen.dart';
-import 'Phone_Auth_Example_Firebase/Cubic_Phone_Auth/Cubic_Phone_Auth_State.dart';
-import 'Phone_Auth_Example_Firebase/SignIn_Screen.dart';
+// import 'Phone_Auth_Example_Firebase/Cubic_Phone_Auth/Cubic_Phone_Auth_State.dart';
+// import 'Phone_Auth_Example_Firebase/SignIn_Screen.dart';
 import 'firebase_options.dart';
 // import 'package:flutter_application_1/InternetConnnection_Exampe/Bloc/InternetCubit/InternetCubit.dart';
 // import 'package:flutter_application_1/InternetConnnection_Exampe/HomeScreen/HomeScreen.dart';
@@ -25,6 +27,39 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
+      create: (context) => Screen1Cubit(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: Routes.onGeneratedRoute,
+        initialRoute: '/screen1',
+      ),
+    );
+  }
+}
+/** */
+
+
+/**
+ * //internet Bloc Example
+ * BlocProvider(
+      create: (context) => InternetCubit(),
+      child: MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home:  HomeScreen(),
+    ),
+    ); */
+
+  //for phone authentication bloc example
+/**BlocProvider(
       create: (context) => PhoneAUthCubit(),
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -49,22 +84,4 @@ class MyApp extends StatelessWidget {
           },
         ),
       ),
-    );
-  }
-}
-/** */
-
-
-/**
- * //internet Bloc Example
- * BlocProvider(
-      create: (context) => InternetCubit(),
-      child: MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home:  HomeScreen(),
-    ),
     ); */
